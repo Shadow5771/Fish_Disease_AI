@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['Columnaris Disease', 'EUS Disease', 'Gill Disease', 'Healthy Fish', 'streptococcus Disease']
+
+roboflow:
+  workspace: saia-tbbth
+  project: fish-skin-diseases-detection
+  version: 6
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/saia-tbbth/fish-skin-diseases-detection/dataset/6

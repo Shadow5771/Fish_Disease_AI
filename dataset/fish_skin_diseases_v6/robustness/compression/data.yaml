@@ -1,0 +1,9 @@
+path: C:\Users\krish\Desktop\ALL FOLDERS\Fish_Disease_AI\dataset\fish_skin_diseases_v6\robustness\compression
+train: images
+val: images
+names:
+  0: Columnaris Disease
+  1: EUS Disease
+  2: Gill Disease
+  3: Healthy Fish
+  4: streptococcus Disease

@@ -1,0 +1,477 @@
+@import "tailwindcss";
+
+@theme static {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Manrope Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #040914;
+  --color-ink-900: #071020;
+  --color-ink-800: #0c1830;
+  --color-ink-700: #122344;
+
+  --color-line: rgb(148 175 220 / 0.14);
+  --color-line-bright: rgb(148 175 220 / 0.24);
+
+  --color-snow: #edf4ff;
+  --color-mist: #9eafca;
+  --color-muted: #71829e;
+
+  --color-accent: #5cc8e8;
+  --color-accent-soft: rgb(92 200 232 / 0.14);
+}
+
+:root {
+  color-scheme: dark;
+  font-family: var(--font-sans);
+  background: var(--color-ink-950);
+  color: var(--color-snow);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-ink-950);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(
+      1000px 600px at 75% -10%,
+      rgb(25 79 140 / 0.22),
+      transparent 65%
+    ),
+    radial-gradient(
+      800px 500px at 0% 45%,
+      rgb(18 101 125 / 0.10),
+      transparent 70%
+    ),
+    #040914;
+  color: var(--color-snow);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* -------------------------------------------------------
+   Typography
+------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  margin-top: 0;
+}
+
+::selection {
+  background: rgb(92 200 232 / 0.24);
+  color: #ffffff;
+}
+
+/* -------------------------------------------------------
+   Scrollbar
+------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #040914;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(120 150 195 / 0.28);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(120 150 195 / 0.44);
+}
+
+/* -------------------------------------------------------
+   Global cards
+------------------------------------------------------- */
+
+.card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(19 32 60 / 0.68),
+      rgb(8 16 34 / 0.72)
+    );
+  border: 1px solid var(--color-line);
+  border-radius: 0.9rem;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.035),
+    0 20px 55px -25px rgb(0 0 0 / 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    transform 240ms ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      500px 180px at 50% 0%,
+      rgb(92 200 232 / 0.055),
+      transparent 70%
+    );
+  opacity: 0.9;
+}
+
+.card:hover {
+  border-color: var(--color-line-bright);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 24px 65px -28px rgb(0 0 0 / 0.85);
+}
+
+/* -------------------------------------------------------
+   Small research labels
+------------------------------------------------------- */
+
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--color-mist);
+}
+
+/* -------------------------------------------------------
+   Buttons
+------------------------------------------------------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.6rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgb(148 175 220 / 0.18);
+  border-radius: 0.65rem;
+  background: rgb(16 29 55 / 0.72);
+  color: var(--color-snow);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgb(92 200 232 / 0.38);
+  background: rgb(20 39 70 / 0.86);
+  box-shadow: 0 10px 30px -18px rgb(92 200 232 / 0.55);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 2px solid rgb(92 200 232 / 0.65);
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------
+   Interactive cursor-reactive cards
+------------------------------------------------------- */
+
+.interactive-card {
+  position: relative;
+  transform:
+    perspective(1000px)
+    rotateX(var(--rotate-x, 0deg))
+    rotateY(var(--rotate-y, 0deg))
+    translateZ(0);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.interactive-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgb(92 200 232 / 0.10),
+      transparent 55%
+    );
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.interactive-card:hover::after {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------
+   Underwater atmosphere
+------------------------------------------------------- */
+
+.ocean-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgb(0 4 12 / 0.28) 100%
+    );
+}
+
+.ocean-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(70px);
+  opacity: 0.22;
+}
+
+/* -------------------------------------------------------
+   Floating particles
+------------------------------------------------------- */
+
+.ocean-particle {
+  position: absolute;
+  border-radius: 999px;
+  background: rgb(161 222 241 / 0.55);
+  box-shadow:
+    0 0 8px rgb(92 200 232 / 0.24);
+  animation:
+    particle-rise
+    var(--particle-duration, 18s)
+    linear
+    var(--particle-delay, 0s)
+    infinite;
+  opacity: 0;
+}
+
+@keyframes particle-rise {
+  0% {
+    transform:
+      translate3d(0, 30px, 0)
+      scale(0.7);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.5;
+  }
+
+  50% {
+    transform:
+      translate3d(
+        var(--particle-drift, 20px),
+        -30vh,
+        0
+      )
+      scale(1);
+  }
+
+  88% {
+    opacity: 0.28;
+  }
+
+  100% {
+    transform:
+      translate3d(
+        calc(var(--particle-drift, 20px) * -0.6),
+        -70vh,
+        0
+      )
+      scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* -------------------------------------------------------
+   Light rays
+------------------------------------------------------- */
+
+.ocean-ray {
+  position: absolute;
+  top: -15%;
+  width: 18%;
+  height: 120%;
+  pointer-events: none;
+  opacity: 0.055;
+  transform: rotate(12deg);
+  transform-origin: top center;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(123 209 238 / 0.65),
+      transparent 70%
+    );
+  filter: blur(12px);
+  animation: ray-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes ray-drift {
+  0% {
+    transform: translateX(-20px) rotate(12deg);
+    opacity: 0.035;
+  }
+
+  100% {
+    transform: translateX(40px) rotate(16deg);
+    opacity: 0.07;
+  }
+}
+
+/* -------------------------------------------------------
+   Depth grid
+------------------------------------------------------- */
+
+.depth-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image:
+    linear-gradient(
+      rgb(148 175 220) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgb(148 175 220) 1px,
+      transparent 1px
+    );
+  background-size: 72px 72px;
+  mask-image:
+    radial-gradient(
+      ellipse at 50% 20%,
+      black 0%,
+      transparent 70%
+    );
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse at 50% 20%,
+      black 0%,
+      transparent 70%
+    );
+}
+
+/* -------------------------------------------------------
+   Soft entrance animation
+------------------------------------------------------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 600ms ease-out both;
+}
+
+/* -------------------------------------------------------
+   Utility
+------------------------------------------------------- */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-muted {
+  color: var(--color-mist);
+}
+
+.glass-line {
+  border: 1px solid rgb(148 175 220 / 0.12);
+  background: rgb(9 18 37 / 0.42);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* -------------------------------------------------------
+   Responsive
+------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 0.75rem;
+  }
+
+  .interactive-card {
+    transform: none !important;
+  }
+
+  .depth-grid {
+    background-size: 52px 52px;
+  }
+
+  .ocean-ray {
+    opacity: 0.035;
+  }
+}
+
+/* -------------------------------------------------------
+   Reduced motion / accessibility
+------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .interactive-card {
+    transform: none !important;
+  }
+}
